@@ -1,0 +1,30 @@
+.default-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #232830;
+}
+
+.sidebar-show .app-sidebar {
+  transform: translateX(0);
+}
+
+.wrapper {
+  flex: 1;
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar-show .wrapper {
+  margin-left: 250px;
+}
+
+.sidebar-unfoldable .wrapper {
+  margin-left: 80px;
+}
+
+.body {
+  padding: 20px;
+  background-color: #232830;
+  color: white;
+  min-height: calc(100vh - 80px);
+}

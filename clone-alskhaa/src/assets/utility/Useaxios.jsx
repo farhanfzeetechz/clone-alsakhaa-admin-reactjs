@@ -3,8 +3,7 @@ import React, { useState } from 'react'
 import axiosInstance from './AxiosInstance';
 
 function Useaxios() {
-    // const [loading, setLoading] = useState(false);
-    // const {loading, setLoading} = useAuth();
+    const [loading, setLoading] = useState(false);
 
     const fetchData = async({url, method = 'get', data = {} ,headers={}}) =>{
         setLoading(true)
@@ -22,7 +21,7 @@ function Useaxios() {
            throw error;
         //    setLoading(false);
         } finally {
-      setLoading(false);
+      // setLoading(false);
     }
     }
   return { fetchData, loading };

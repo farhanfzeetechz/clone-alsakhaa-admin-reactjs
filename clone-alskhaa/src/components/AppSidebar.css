@@ -1,0 +1,47 @@
+.app-sidebar {
+  width: 255px;
+  background-color: #026962;
+  color: white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
+}
+
+.sidebar-show .app-sidebar {
+  transform: translateX(0);
+}
+
+.sidebar-unfoldable .app-sidebar {
+  width: 80px;
+}
+
+.sidebar-header {
+  display: flex;
+  padding: 16px;
+  border-bottom: 1px solid rgb(48, 48, 48);
+  text-align: center;
+}
+
+.sidebar-header h2 {
+  margin: 0;  
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: white;
+  font-family: 'Poppins';
+}
+
+.sidebar-nav {
+  padding: 10px 0;
+}
+
+.sidebar-unfoldable .sidebar-header h2 {
+  display: none;
+}
+
+.sidebar-unfoldable .nav-text {
+  display: none;
+}

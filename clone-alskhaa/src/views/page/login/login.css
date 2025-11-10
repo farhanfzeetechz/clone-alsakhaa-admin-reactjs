@@ -186,6 +186,16 @@
     border-color: #dc3545 !important;
     box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
 }
+.password-toggle {
+  transition: all 0.3s ease;
+  border-radius: 0 10px 10px 0 !important;
+  cursor: pointer;
+}
+
+.password-toggle:hover {
+  transform: scale(1.1);
+  background: rgb(2, 117, 110) !important;
+}
 
 /* Responsive Design */
 @media (max-width: 480px) {
