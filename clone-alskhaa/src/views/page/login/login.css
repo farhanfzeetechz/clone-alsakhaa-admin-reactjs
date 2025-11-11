@@ -29,9 +29,6 @@
 }
 
 .login-container {
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
     position: relative;
     z-index: 2;
     width: 100%;
@@ -48,6 +45,7 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
+    width: 100%;
 }
 
 .glass-form:hover {
@@ -104,6 +102,9 @@
     color: white !important;
     transition: all 0.3s ease;
     border: 2px solid transparent !important;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
 }
 
 .custom-input:focus {
@@ -144,6 +145,9 @@
     cursor: pointer;
     transition: all 0.3s ease;
     margin-bottom: 6px;
+    width: 100%;
+    min-width: 53.3vh;
+    /* min-height: 50px; */
 }
 
 .login-button:hover {
@@ -162,10 +166,18 @@
 }
 
 .logo-container {
-    margin-left: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100px;
     height: 100px;
-    margin-bottom: 1.2em;
+    margin: 0 auto 1.2em auto;
+}
+
+.logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .input-error {
@@ -198,12 +210,74 @@
 }
 
 /* Responsive Design */
-@media (max-width: 480px) {
-    .login-card {
-        padding: 30px 24px;
+@media (max-width: 768px) {
+    .auth-wrapper {
+        padding: 10px;
     }
+    
+    .login-container {
+        max-width: 90%;
+        padding: 15px;
+    }
+    
+    .glass-form {
+        padding: 25px 20px;
+    }
+    
+    .login-header h2 {
+        font-size: 28px;
+    }
+    
+    .logo-container {
+        width: 80px;
+        height: 80px;
+    }
+}
 
+@media (max-width: 480px) {
+    .auth-wrapper {
+        padding: 5px;
+    }
+    
+    .login-container {
+        max-width: 95%;
+        padding: 10px;
+    }
+    
+    .glass-form {
+        padding: 20px 15px;
+        border-radius: 12px;
+    }
+    
     .login-header h2 {
         font-size: 24px;
+    }
+    
+    .login-header p {
+        font-size: 14px;
+    }
+    
+    .logo-container {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .login-form {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 360px) {
+    .glass-form {
+        padding: 15px 10px;
+    }
+    
+    .login-header h2 {
+        font-size: 22px;
+    }
+    
+    .logo-container {
+        width: 60px;
+        height: 60px;
     }
 }

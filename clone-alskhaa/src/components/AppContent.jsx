@@ -4,7 +4,7 @@ import Dashboard from '../views/Dashboard/Dashboard'
 
 const AppContent = () => {
   return (
-    <div className="app-content">
+    <div className="app-content"  style={{ marginTop: '60px' }}>
       <div className="container px-4">
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>

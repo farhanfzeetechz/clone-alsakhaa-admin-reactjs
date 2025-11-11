@@ -1,19 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import toastStyle from '../../../helper/taoststyle';
 import Cookies from 'js-cookie';
 import './login.css'
 import colors from '../../../helper/Colors';
-import Useaxios from '../../../assets/utility/Useaxios';
+import Useaxios from '../../../utility/Useaxios';
+import toast, { Toaster } from 'react-hot-toast';
 
-const toastStyle = {
-  position: 'top-right',
-  autoClose: 3000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-};
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -36,6 +29,14 @@ const Login = () => {
     }
   };
 
+  const hasShownToast = useRef(false);
+
+  useEffect(() => {
+    if (!hasShownToast.current) {
+      toast.success('Welcome to the login page!', toastStyle);
+      hasShownToast.current = true;
+    }
+  }, []);
   const formValidation = () => {
     const newErrors = {};
 
@@ -78,7 +79,7 @@ const Login = () => {
 
         setTimeout(() => {
           navigate('/dashboard')
-        }, 1000)
+        }, 3000)
       }
     } catch (err) {
       console.log(err)
@@ -90,6 +91,7 @@ const Login = () => {
   };
 
   return (
+    <>
     <div
       className="auth-wrapper animated-background"
       style={{
@@ -195,6 +197,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
