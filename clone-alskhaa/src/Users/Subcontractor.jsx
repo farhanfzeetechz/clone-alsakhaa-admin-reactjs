@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import toastStyle from '../helper/taoststyle';
 import Useaxios from '../utility/Useaxios';
 import colors from '../helper/Colors';
+import ActionUser from '../helper/ActionUser';
 
 const Subcontractor = () => {
     const { fetchData } = Useaxios();
@@ -58,7 +59,7 @@ const Subcontractor = () => {
         { label: 'Phone', key: 'phone' },
         { label: 'Role', key: 'role' },
         { label: 'Joined Date', key: 'createdAt' },
-        { label: 'Status', key: 'status' },
+        { label: 'Action', key: 'Action' },
     ]
 
     return (
@@ -149,8 +150,12 @@ const Subcontractor = () => {
                                         <CTableDataCell>{user.phone || 'N/A'}</CTableDataCell>
                                         <CTableDataCell>{user.role}</CTableDataCell>
                                         <CTableDataCell>{new Date(user.createdAt).toLocaleDateString()}</CTableDataCell>
-                                        <CTableDataCell className={user.isBlocked ? "status-inactive" : "status-active"}>
-                                            {user.isBlocked ? 'Blocked' : 'Active'}
+                                        <CTableDataCell>
+                                            <ActionUser
+                                                userId={user._id}
+                                                isBlocked={user.isBlocked}
+                                                onUpdate={fetchSubcontractorUsers}
+                                            />
                                         </CTableDataCell>
                                     </CTableRow>
                                 ))}

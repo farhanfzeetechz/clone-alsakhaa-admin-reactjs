@@ -7,11 +7,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 80%;
-  min-width: 50vh;
+  width: 100%;
   position: fixed;
   top: 0;
-  z-index: 1;
+  left: 0;
+  z-index: 999;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar-show .app-header {
+  margin-left: 255px;
+  width: calc(100% - 255px);
+}
+
+.sidebar-unfoldable .app-header {
+  margin-left: 80px;
+  width: calc(100% - 80px);
 }
 .header-left{
   display: flex;

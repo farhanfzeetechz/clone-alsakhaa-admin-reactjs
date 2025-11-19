@@ -1,0 +1,89 @@
+.d-flex {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+
+/* FIXED: renamed from .d-flex to avoid bootstrap conflict */
+.action-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Base button style */
+.btn-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  padding: 0;
+}
+
+.btn-action:focus {
+  outline: none;
+}
+
+/* Hover animation */
+.btn-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* VIEW BUTTON */
+.btn-view {
+  background-color: #026962;
+  color: white;
+}
+
+/* BLOCK BUTTON */
+.btn-block {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-block:hover {
+  background-color: #c82333;
+}
+
+/* UNBLOCK BUTTON */
+.btn-unblock {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-unblock:hover {
+  background-color: #1e7e34;
+}
+
+/* DELETE BUTTON */
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+}
+
+/* Mobile Support */
+@media (max-width: 768px) {
+  .btn-action {
+    width: 32px;
+    height: 32px;
+  }
+
+  .btn-action svg {
+    width: 14px;
+    height: 14px;
+  }
+}
