@@ -22,6 +22,7 @@ const navItems = [
   {
     type: 'group',
     name: 'Users',
+    path: '/users',
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
     items: [
       {
