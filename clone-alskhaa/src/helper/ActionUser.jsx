@@ -8,9 +8,9 @@ import Swal from 'sweetalert2'
 import Useaxios from '../utility/Useaxios'
 import colors from './Colors'
 
-const ActionUser = ({ user, onUpdate }) => {
+const ActionUser = ({ onview,user, onUpdate,handleBlock }) => {
 
-    console.log(user)
+    // console.log(user)
     const { fetchData } = Useaxios()
     const [loading, setLoading] = useState(false)
 
@@ -106,7 +106,7 @@ const ActionUser = ({ user, onUpdate }) => {
         <div className="d-flex">
             <button
                 className="btn-action btn-view"
-                onClick={() => {}}
+                onClick={() => onview(user)}
                 title="View user details"
             >
                 <FaEye size={16} />

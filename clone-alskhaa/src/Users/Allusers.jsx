@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CCard, CCardHeader, CCardBody, CTable, CButton, CTableHeaderCell, CTableHead, CTableBody, CTableDataCell, CTableRow, CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem, CPagination, CPaginationItem } from '@coreui/react';
+import { CCard, CCardHeader, CCardBody, CTable, CButton, CTableHeaderCell, CTableHead, CTableBody, CTableDataCell, CTableRow, CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem, CPagination, CPaginationItem, CListGroup } from '@coreui/react';
 import './Allusers.css';
 import Colors from '../helper/Colors'
 import toast from 'react-hot-toast';
@@ -7,6 +7,7 @@ import toastStyle from './../helper/taoststyle';
 import Useaxios from '../utility/Useaxios';
 import colors from '../helper/Colors';
 import ActionUser from '../helper/ActionUser';
+import UserProfileModal from '../helper/UserProfileModal';
 
 
 
@@ -22,6 +23,8 @@ const Allusers = () => {
     const [role] = useState('');
     const [blockedStatus] = useState('');
     const [showLimitDropdown, setShowLimitDropdown] = useState(false);
+    const [showUserProfileModal, setShowUserProfileModal] = useState(false);
+    const [selectedUser, setSelectedUser] = useState({})
 
     const limitOptions = [10, 25, 50, 100];
 
@@ -81,8 +84,27 @@ const Allusers = () => {
     ]
 
 
+
+    const onView = (user) => {
+        setSelectedUser(user)
+        setShowUserProfileModal(true)
+    }
+
+    const { handleBlock } = ActionUser(fetchAllUsers)
+    const { ActivateUser } = BlockedUser(fetchAllUsers)
+
+
+
     return (
         <div className="users-container">
+            <UserProfileModal
+                visible={showUserProfileModal}
+                onClose={() => setShowUserProfileModal(false)}
+                user={selectedUser}
+                buttonTitle={selectedUser?.isBlocked ? 'Unblock User' : 'Block User'}
+                onButtonPress={selectedUser?.isBlocked ? ActivateUser : handleBlock}
+            />
+
             <CCard className="users-card">
                 <CCardHeader className="users-header">
                     <h2>Registered User</h2>
@@ -189,8 +211,13 @@ const Allusers = () => {
                                                 userId={user._id}
                                                 isBlocked={user.isBlocked}
                                                 user={user}
-                                                onUpdate={()=>fetchAllUsers()}
-                                                 />
+                                                onUpdate={() => fetchAllUsers()}
+                                                onview={(user) => {
+                                                    onView(user)
+
+                                                }}
+                                            />
+
                                         </CTableDataCell>
                                     </CTableRow>
                                 ))}
@@ -215,6 +242,8 @@ const Allusers = () => {
                             </CPagination>
                         </div>
                     </div>
+
+
                 </CCardBody>
             </CCard>
         </div>

@@ -29,7 +29,7 @@ const AppSidebar = () => {
               marginLeft: '20px',
             }
           }
-          className="d-none d-lg-block close-btn"
+          className="d-none d-lg-block n"
           onClick={() => dispatch({ type: 'set', sidebarShow: false })}
         >
           ×

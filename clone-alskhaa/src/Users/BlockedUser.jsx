@@ -12,7 +12,7 @@ import colors from '../helper/Colors';
 import { FaEye } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 
-const BlockedUser = () => {
+const BlockedUser = ({ActivateUser}) => {
 
     const { fetchData } = Useaxios();
     const [allUsers, setAllUsers] = useState([]);
