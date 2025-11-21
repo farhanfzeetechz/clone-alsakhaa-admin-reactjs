@@ -189,8 +189,8 @@ const UserProfileModal = ({ visible, onClose, user, buttonTitle, onButtonPress }
                             onClick={() => onButtonPress(user._id, onClose)}
                             className="action-btn"
                             style={{
-                                backgroundColor: (user.isBlocked || user.blocked) ? '#dc3545' : colors.primary,
-                                borderColor: (user.isBlocked || user.blocked) ? '#dc3545' : colors.primary
+                                backgroundColor: (user.isBlocked || user.blocked) ? colors.primary : '#dc3545',
+                                borderColor: (user.isBlocked || user.blocked) ? colors.primary : '#dc3545'
                             }}
                         >
                             {buttonTitle}

@@ -11,8 +11,10 @@ import Useaxios from '../utility/Useaxios';
 import colors from '../helper/Colors';
 import { FaEye } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import UserProfileModal from '../helper/UserProfileModal';
+import handleBlock from '../helper/ActionUser';
 
-const BlockedUser = ({ActivateUser}) => {
+const BlockedUser = () => {
 
     const { fetchData } = Useaxios();
     const [allUsers, setAllUsers] = useState([]);
@@ -20,6 +22,8 @@ const BlockedUser = ({ActivateUser}) => {
     const [limit, setLimit] = useState(10);
     const [totalPages, setTotalPages] = useState(1);
     const [showLimitDropdown, setShowLimitDropdown] = useState(false);
+    const [showUserProfileModal, setShowUserProfileModal] = useState([])
+    const [selectedUser, setSelectedUser] = useState({})
 
     const limitOptions = [10, 25, 50, 100];
 
@@ -94,6 +98,15 @@ const BlockedUser = ({ActivateUser}) => {
         setShowLimitDropdown(false);
     };
 
+
+    const handleViewUser = (user) => {
+        setSelectedUser(user);
+        setShowUserProfileModal(true);
+    };
+
+
+
+
     const tableHeaders = [
         { label: 'S.No', key: 'sno' },
         { label: 'User ID', key: 'userId' },
@@ -107,6 +120,13 @@ const BlockedUser = ({ActivateUser}) => {
 
     return (
         <div className="users-container">
+            <UserProfileModal
+                visible={showUserProfileModal}
+                onClose={() => setShowUserProfileModal(false)}
+                user={selectedUser}
+                buttonTitle={selectedUser?.isBlocked ? 'Unblock User' : 'Block User'}
+                onButtonPress={selectedUser?.isBlocked ? ActivateUser : handleBlock}
+            />
             <CCard className="users-card">
                 <CCardHeader className="users-header">
                     <h2>Blocked Users</h2>
@@ -196,7 +216,7 @@ const BlockedUser = ({ActivateUser}) => {
                                             <div className="d-flex gap-2">
                                                 <button
                                                     className="btn btn-action btn-view"
-                                                    onClick={() => console.log("View:", user)}
+                                                    onClick={() => handleViewUser(user)}
                                                 >
                                                     <FaEye size={16} />
                                                 </button>

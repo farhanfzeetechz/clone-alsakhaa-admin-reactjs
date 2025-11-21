@@ -8,15 +8,14 @@ import Swal from 'sweetalert2'
 import Useaxios from '../utility/Useaxios'
 import colors from './Colors'
 
-const ActionUser = ({ onview,user, onUpdate,handleBlock }) => {
+const ActionUser = ({ user, onview }) => {
 
     // console.log(user)
     const { fetchData } = Useaxios()
     const [loading, setLoading] = useState(false)
 
-    const handleBlock = async (id, isCurrentlyBlocked) => {
-    console.log(id);
-    
+    const handleBlock = async (id, isCurrentlyBlocked,userId) => {
+
         const actionText = isCurrentlyBlocked ? 'unblock' : 'block'
         const actionMessage = isCurrentlyBlocked
             ? 'Do you want to unblock this user?'
@@ -100,7 +99,7 @@ const ActionUser = ({ onview,user, onUpdate,handleBlock }) => {
         }
     }
 
-    const isUserBlocked = user?.isBlocked || user?.blocked
+
 
     return (
         <div className="d-flex">
@@ -113,9 +112,8 @@ const ActionUser = ({ onview,user, onUpdate,handleBlock }) => {
             </button>
 
             <button
-                className={`btn-action ${
-                   user?.isBlocked ? 'btn-unblock' : 'btn-block'
-                }`}
+                className={`btn-action ${user?.isBlocked ? 'btn-unblock' : 'btn-block'
+                    }`}
                 onClick={() => handleBlock(user._id, user?.isBlocked)}
                 title={user?.isBlocked ? 'Unblock User' : 'Block User'}
                 disabled={loading}

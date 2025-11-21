@@ -8,6 +8,9 @@ import Useaxios from '../utility/Useaxios';
 import colors from '../helper/Colors';
 import ActionUser from '../helper/ActionUser';
 import UserProfileModal from '../helper/UserProfileModal';
+import handleBlock from '../helper/ActionUser';
+import ActivateUser from '../Users/BlockedUser';
+import Swal from 'sweetalert2';
 
 
 
@@ -83,17 +86,60 @@ const Allusers = () => {
         { label: 'Actions', key: 'actions' },
     ]
 
+   const handleBlock = async (id, isCurrentlyBlocked,userId) => {
 
+        const actionText = isCurrentlyBlocked ? 'unblock' : 'block'
+        const actionMessage = isCurrentlyBlocked
+            ? 'Do you want to unblock this user?'
+            : 'Do you want to block this user?'
+
+        const successMessage = isCurrentlyBlocked
+            ? 'User unblocked successfully'
+            : 'User blocked successfully'
+
+        const result = await Swal.fire({
+            title: `Are you sure?`,
+            text: actionMessage,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: `Yes, ${actionText} this user!`,
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: isCurrentlyBlocked ? '#28a745' : colors.primary,
+            cancelButtonColor: '#6c757d',
+        })
+
+        if (result.isConfirmed) {
+            setLoading(true)
+            try {
+                const res = await fetchData({
+                    url: `/api/v1/admin/rolebase/blockUser/${id}`,
+                    method: 'POST',
+                    data: {
+                        userId: id,
+                        action: !isCurrentlyBlocked
+                    },
+                })
+
+                if (res.success) {
+                    toast.success(successMessage, toastStyle)
+                    onUpdate && onUpdate()
+                } else {
+                    toast.error(res.message || `Failed to ${actionText} user`, toastStyle)
+                }
+            } catch (error) {
+                toast.error(error?.response?.data?.message || 'Something went wrong', toastStyle)
+            } finally {
+                setLoading(false)
+            }
+        }
+    }
 
     const onView = (user) => {
         setSelectedUser(user)
         setShowUserProfileModal(true)
+        console.log("farhan");
+
     }
-
-    const { handleBlock } = ActionUser(fetchAllUsers)
-    const { ActivateUser } = BlockedUser(fetchAllUsers)
-
-
 
     return (
         <div className="users-container">
@@ -102,9 +148,23 @@ const Allusers = () => {
                 onClose={() => setShowUserProfileModal(false)}
                 user={selectedUser}
                 buttonTitle={selectedUser?.isBlocked ? 'Unblock User' : 'Block User'}
-                onButtonPress={selectedUser?.isBlocked ? ActivateUser : handleBlock}
-            />
+                onButtonPress={async () => {
+                    const userId = selectedUser._id;
 
+                    let done = false;
+
+                    if (selectedUser.isBlocked) {
+                        done = await handleBlock(userId);
+                    } else {
+                        done = await handleBlock(userId);
+                    }
+
+                    if (done) {
+                        fetchAllUsers();       // refresh list
+                        setShowUserProfileModal(false); // close modal
+                    }
+                }}
+            />
             <CCard className="users-card">
                 <CCardHeader className="users-header">
                     <h2>Registered User</h2>
@@ -214,7 +274,6 @@ const Allusers = () => {
                                                 onUpdate={() => fetchAllUsers()}
                                                 onview={(user) => {
                                                     onView(user)
-
                                                 }}
                                             />
 
